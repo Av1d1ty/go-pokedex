@@ -4,8 +4,8 @@ import (
 	"errors"
 )
 
-func callbackMap(cfg *config) error {
-    resp, err := cfg.pokeapiClient.GetLocationAreas(cfg.nextLocationAreaURL)
+func callbackMap(cfg *config, args ...string) error {
+    resp, err := cfg.pokeapiClient.GetLocationAreaList(cfg.nextLocationAreaURL)
     if err != nil {
         return err
     }
@@ -18,11 +18,11 @@ func callbackMap(cfg *config) error {
     return nil
 }
 
-func callbackMapBack(cfg *config) error {
+func callbackMapBack(cfg *config, args ...string) error {
     if cfg.prevLocationAreaURL == nil {
         return errors.New("You are on the first page.")
     }
-    resp, err := cfg.pokeapiClient.GetLocationAreas(cfg.prevLocationAreaURL)
+    resp, err := cfg.pokeapiClient.GetLocationAreaList(cfg.prevLocationAreaURL)
     if err != nil {
         return err
     }
